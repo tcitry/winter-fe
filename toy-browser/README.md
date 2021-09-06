@@ -38,6 +38,6 @@ https://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algor
 
 [浏览器的工作原理：新式网络浏览器幕后揭秘](https://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/)
 
-### 脑图
+### 前端脑图
 
-https://www.yuque.com/docs/share/cb5a7d39-16ca-4f04-abcf-175473a4340e?# 《前端脑图》
+https://www.yuque.com/tcitry/blog/fe-stack
