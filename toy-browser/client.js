@@ -1,5 +1,7 @@
 const net = require("net");
 const parser = require("./parser");
+const render = require("./render.js");
+const images = require("images");
 
 class Request {
   constructor(options) {
@@ -35,8 +37,8 @@ ${this.bodyText}`;
 
   send(connection) {
     return new Promise((resolve, reject) => {
-      console.log("request:");
-      console.log(this.toString());
+      // console.log("request:");
+      // console.log(this.toString());
       const parser = new ResponseParser();
       if (connection) {
         connection.write(this.toString());
@@ -52,8 +54,8 @@ ${this.bodyText}`;
         );
       }
       connection.on("data", (data) => {
-        console.log("response:");
-        console.log(data.toString());
+        // console.log("response:");
+        // console.log(data.toString());
         parser.receive(data.toString());
         // resolve(data.toString());
         if (parser.isFinished) {
@@ -112,6 +114,7 @@ class ResponseParser {
   }
 
   receiveChar(char) {
+    // 通过状态机轮序每个字符，为 ResponseParser 的各个属性赋值
     if (this.current === this.WAITING_STATUS_LINE) {
       if (char === "\r") {
         this.current = this.WAITING_STATUS_LINE_END;
@@ -222,5 +225,7 @@ void (async function () {
   });
   let response = await request.send();
   let dom = parser.parseHTML(response.body);
-  console.log("dom: ", dom);
+  let viewport = images(800, 600);
+  render(viewport, dom);
+  // console.log("dom: ", dom);
 })();
