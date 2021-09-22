@@ -1,5 +1,5 @@
-a = -1;
-if (a) {
+a = null;
+if (a === null) {
   console.log("a true");
 } else {
   console.log("a false");

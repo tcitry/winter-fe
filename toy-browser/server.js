@@ -33,8 +33,7 @@ http
             <img />
         </div>
     </body>
-</html>
-`);
+</html>`);
       });
   })
   .listen(8000);

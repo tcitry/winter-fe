@@ -122,7 +122,7 @@ function emit(token) {
     element.tagName = token.tagName;
 
     for (let p in token) {
-      if (p != "type" || p != "tagName") {
+      if (p !== "type" || p !== "tagName") {
         element.attributes.push({
           name: p,
           value: token[p],
@@ -139,7 +139,7 @@ function emit(token) {
     }
     currentTextNode = null;
   } else if (token.type === "endTag") {
-    if (top.tagName != token.tagName) {
+    if (top.tagName !== token.tagName) {
       throw new Error("Tag start end doesn't match!");
     } else {
       if (top.tagName === "style") {
@@ -147,7 +147,7 @@ function emit(token) {
       }
       stack.pop();
     }
-    // layout(top);
+    layout(top);
     currentTextNode = null;
   } else if (token.type === "text") {
     if (currentTextNode === null) {
@@ -191,7 +191,6 @@ function tagOpen(c) {
       type: "text",
       content: c,
     });
-    return;
   }
 }
 
