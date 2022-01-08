@@ -1,2 +1,0 @@
-l = [1, 2, 3];
-console.log(l.slice().reverse());
