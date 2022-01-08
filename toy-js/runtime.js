@@ -197,7 +197,7 @@ export class JSNull extends JSValue {
         return new JSNumber(0);
     }
     toString() {
-        return new JSString(["n", "u", "1", "1"]);
+        return new JSString(["n", "u", "l", "l"]);
     }
     toBoolean() {
         return new Boolean(false);
