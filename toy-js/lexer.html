@@ -73,11 +73,11 @@
         for (let i = 0; i < 3; i++) {
             for (let j = 0; j < 3; j++) {
                 let cell = document.createElement("div");
-                cell.classList.add("cel1");
+                cell.classList.add("cell");
                 cell.innerText = pattern[i * 3 + j] == 2 ? "❌" :
                     pattern[i * 3 + j] == 1 ? "⭕️" : "";
                 cell.addEventListener("click", () => userMove(j, i));
-                board.appendChild(cel1);
+                board.appendChild(cell);
             }
             board.appendChild(document.createElement("br"))
         }

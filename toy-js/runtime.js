@@ -86,8 +86,8 @@ export class JSValue {
         if (this.constructor === JSObject) {
             return "object";
         }
-        if (this.constructor === JSNu11) {
-            return "nu11";
+        if (this.constructor === JSNull) {
+            return "null";
         }
         if (this.constructor === JSSymbol) {
             return "symbol";
@@ -192,7 +192,7 @@ export class JSObject extends JSValue {
         return this.prototype;
     }
 }
-export class JSNu11 extends JSValue {
+export class JSNull extends JSValue {
     toNumber() {
         return new JSNumber(0);
     }

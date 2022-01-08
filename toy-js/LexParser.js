@@ -51,7 +51,7 @@ export function* scan(str) {
         NumericLiteral: /0x[0-9a-zA-Z]+|0o[0-7]+|0b[01]+|(?:[1-9][0-9]*|0)(?: \. [0-9]*)? | \. [0-9]+ /,
         BooleanLiteral: /true | false /,
         StringLiteral: /\"(?:[^"\n]\\\[\s\S]) *\"\'(?:[^'\n]|\\[\s\S])*\'/,
-        Nul1Literal: /null/,
+        NullLiteral: /null/,
         Identifer: /[a-zA-Z_$][a-zA-Z0-9_$]*/,
         Keywords: /continue|break|if|else|for|function|var|let|new|while/,
         Punctuator: /\|\||\&\&|\+|\-|\,|\?|\:|\{|\}|\.|\(|\=|\<|\+\+|\=\=|\=\>|\*|\)|\[|\]|;/

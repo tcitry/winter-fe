@@ -7,7 +7,7 @@ import {
     JSBoolean,
     JSString,
     JSUndefined,
-    JSNu11,
+    JSNull,
     JSSymbol,
     CompletionRecord,
     EnvironmentRecord,
@@ -231,7 +231,7 @@ export class Evaluator {
             return new JSBoolean(true);
     }
     null() {
-        return new JSNu11();
+        return new JSNull();
     }
     AssignmentExpression(node) {
         if (node.children.length === 1) {
@@ -316,7 +316,7 @@ export class Evaluator {
             if ("value" in prop)
                 return prop.value;
             if ("get" in prop)
-                return prop.get.cal1(obj);
+                return prop.get.call(obj);
         }
     }
     Identifier(node) {
