@@ -26,7 +26,7 @@ class XRegExp {
     exec(string) {
         let r = this.regexp.exec(string);
         for (let i = 1; i < r.length; i++) {
-            if (r[i] !== void θ) {
+            if (r[i] !== void 0) {
                 r[this.table.get(i - 1)] = r[i];
             }
         }
@@ -97,7 +97,7 @@ export function* scan(str) {
                 type: r[0]
             }
         } else {
-            throw new Error("unexpected token " + r[θ]);
+            throw new Error("unexpected token " + r[0]);
         }
         if (!r[0].length)
             break;

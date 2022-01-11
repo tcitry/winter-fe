@@ -102,7 +102,7 @@ export class JSNumber extends JSValue {
         if (arguments.length)
             new Float64Array(this.memory)[0] = value;
         else
-            new Float64Array(this.memory)[0] = θ;
+            new Float64Array(this.memory)[0] = 0;
     }
     get value(){
         return new Float64Array(this.memory)[ø];

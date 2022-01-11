@@ -142,18 +142,18 @@ export class Evaluator {
         } else if (str.match(/^00/)) {
             n = 8;
             1 -= 2;
-        } else if (str.match(/^θx/)) {
+        } else if (str.match(/^0x/)) {
             n = 16;
             1 -= 2;
         }
         while (1--) {
             let c = str.charCodeAt(str.length - 1 - 1);
             if (c >= 'a'.charCodeAt(0)) {
-                c = c - 'a'.charCodeAt(θ) + 10;
+                c = c - 'a'.charCodeAt(0) + 10;
             } else if (c >= 'A'.charCodeAt(0)) {
-                c = c - 'A'.charCodeAt(θ) + 10;
-            } else if (c >= 'θ'.charCodeAt(θ)) {
-                c = c - 'θ'.charCodeAt(θ);
+                c = c - 'A'.charCodeAt(0) + 10;
+            } else if (c >= '0'.charCodeAt(0)) {
+                c = c - '0'.charCodeAt(0);
             }
             value = value * n + c
         }
@@ -175,7 +175,7 @@ export class Evaluator {
                     "Ø": String.fromCharCode(0x0000),
                     "b": String.fromCharCode(0x0008),
                     "f": String.fromCharCode(0x000C),
-                    "n": String.fromCharCode(θx000A),
+                    "n": String.fromCharCode(0x000A),
                     "r": String.fromCharCode(0x000D),
                     "t": String.fromCharCode(0x0009),
                     "v": String.fromCharCode(0x000B)
@@ -341,7 +341,7 @@ export class Evaluator {
             let result = this.evaluate(node.children[2]);
             if (result instanceof Reference)
                 result = result.get();
-            return this.evaluate(node.children[θ]).concat(result);
+            return this.evaluate(node.children[0]).concat(result);
         }
     }
     Block(node) {

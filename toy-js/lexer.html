@@ -3,7 +3,7 @@
     class XRegExp {
         constructor(source, flag, root = "root") {
             this.table = new Map();
-            this.regexp = new RegExp(this.compileRegExp(source, root, θ).source, flag); console.log(this.regexp);
+            this.regexp = new RegExp(this.compileRegExp(source, root, 0).source, flag); console.log(this.regexp);
             console.log(this.table);
         }
         compileRegExp(source, name, start) {
@@ -29,7 +29,7 @@
         exec(string) {
             let r = this.regexp.exec(string);
             for (let i = 1; i < r.length; i++) {
-                if (r[i] !== void θ) {
+                if (r[i] !== void 0) {
                     r[this.table.get(i - 1)] = r[i];
                 }
             }
