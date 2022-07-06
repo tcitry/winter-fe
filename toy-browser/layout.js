@@ -17,7 +17,7 @@ function getStyle(element) {
     return element.style;
 }
 
-function layout(element) {
+export function layout(element) {
     if (!element.computedStyle) {
         return;
     }
@@ -120,8 +120,12 @@ function layout(element) {
         elementStyle[mainSize] = 0;
         for (let i = 0; i < items.length; i++) {
             let itemStyle = items[i];
-            if (itemStyle[mainSize] !== null || itemStyle[mainSize] !== void 0) {
-                elementStyle[mainSize] = elementStyle[mainSize] + itemStyle[mainSize];
+            if (
+                itemStyle[mainSize] !== null ||
+                itemStyle[mainSize] !== void 0
+            ) {
+                elementStyle[mainSize] =
+                    elementStyle[mainSize] + itemStyle[mainSize];
             }
         }
         isAutoMainSize = true;
@@ -145,7 +149,10 @@ function layout(element) {
             flexLine.push(item);
         } else if (style.flexWrap === "nowrap" && isAutoMainSize) {
             mainSpace -= itemStyle[mainSize];
-            if (itemStyle[crossSize] !== null && itemStyle[crossSize] !== void 0) {
+            if (
+                itemStyle[crossSize] !== null &&
+                itemStyle[crossSize] !== void 0
+            ) {
                 crossSpace = Math.max(crossSpace, itemStyle[crossSize]);
             }
             flexLine.push(item);
@@ -163,7 +170,10 @@ function layout(element) {
             } else {
                 flexLine.push(item);
             }
-            if (itemStyle[crossSize] !== null && itemStyle[crossSize] !== void 0) {
+            if (
+                itemStyle[crossSize] !== null &&
+                itemStyle[crossSize] !== void 0
+            ) {
                 crossSpace = Math.max(crossSpace, itemStyle[crossSize]);
             }
             mainSpace -= itemStyle[mainSize];
@@ -212,7 +222,8 @@ function layout(element) {
                     let item = items[i];
                     let itemStyle = getStyle(item);
                     if (itemStyle.flex) {
-                        itemStyle[mainSize] = (mainSpace / flexTotal) * itemStyle.flex;
+                        itemStyle[mainSize] =
+                            (mainSpace / flexTotal) * itemStyle.flex;
                     }
                     itemStyle[mainStart] = currentMain;
                     itemStyle[mainEnd] =
@@ -254,7 +265,8 @@ function layout(element) {
         });
     }
 
-    if (!style[crossSize]) { // auto sizing
+    if (!style[crossSize]) {
+        // auto sizing
         crossSpace = 0;
         elementStyle[crossSize] = 0;
         for (let i = 0; i < flexLines.length; i++) {
@@ -296,8 +308,6 @@ function layout(element) {
         crossBase += 0;
         step = 0;
     }
-    console.log("layout:1", items);
-    console.log("style:1", style);
 
     flexLines.forEach(function (items) {
         let lineCrossSize =
@@ -323,7 +333,8 @@ function layout(element) {
             }
             if (align === "center") {
                 itemStyle[crossStart] =
-                    crossBase + (crossSign * (lineCrossSize - itemStyle[crossSize])) / 2;
+                    crossBase +
+                    (crossSign * (lineCrossSize - itemStyle[crossSize])) / 2;
                 itemStyle[crossEnd] =
                     itemStyle[crossStart] + crossSign * itemStyle[crossSize];
             }
@@ -333,16 +344,14 @@ function layout(element) {
                 itemStyle[crossEnd] =
                     crossBase +
                     crossSign *
-                    (itemStyle[crossSize] !== null && itemStyle[crossSize] !== (void 0)
-                        ? itemStyle[crossSize]
-                        : lineCrossSize);
+                        (itemStyle[crossSize] !== null &&
+                        itemStyle[crossSize] !== void 0
+                            ? itemStyle[crossSize]
+                            : lineCrossSize);
                 itemStyle[crossSize] =
                     crossSign * (itemStyle[crossEnd] - itemStyle[crossStart]);
             }
         }
         crossBase += crossSign * (lineCrossSize + step);
     });
-    console.log("layout2:", items);
 }
-
-module.exports = layout;

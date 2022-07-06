@@ -1,5 +1,5 @@
-const css = require("css");
-const layout = require("./layout.js");
+import css from "css";
+import { layout } from "./layout.js";
 const EOF = Symbol("EOF");
 
 let currentToken = null;
@@ -25,7 +25,9 @@ function match(element, selector) {
             return true;
         }
     } else if (selector.charAt(0) === ".") {
-        let attr = element.attributes.filter((attr) => attr.name === "class")[0];
+        let attr = element.attributes.filter(
+            (attr) => attr.name === "class"
+        )[0];
         if (attr && attr.value === selector.replace(".", "")) {
             return true;
         }
@@ -92,13 +94,19 @@ function computeCSS(element) {
                     computedStyle[declaration.property] = {};
                 }
                 if (!computedStyle[declaration.property].specificity) {
-                    computedStyle[declaration.property].value = declaration.value;
+                    computedStyle[declaration.property].value =
+                        declaration.value;
                     computedStyle[declaration.property].specificity = sp;
                 } else if (
-                    compare(computedStyle[declaration.property].specificity, sp) < 0
+                    compare(
+                        computedStyle[declaration.property].specificity,
+                        sp
+                    ) < 0
                 ) {
                     for (let k = 0; k < 4; k++) {
-                        computedStyle[declaration.property][declaration.value][k] += sp[k];
+                        computedStyle[declaration.property][declaration.value][
+                            k
+                        ] += sp[k];
                     }
                 }
             }
@@ -353,7 +361,7 @@ function afterAttributeName(c) {
     }
 }
 
-function parseHTML(html) {
+export function parseHTML(html) {
     let state = data;
     for (let c of html) {
         state = state(c);
@@ -361,5 +369,3 @@ function parseHTML(html) {
     state = state(EOF);
     return stack[0];
 }
-
-module.exports.parseHTML = parseHTML;

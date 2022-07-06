@@ -1,7 +1,7 @@
 {
   "name": "winter-fe",
-  "version": "1.0.0",
-  "description": "follow winter learn fe",
+  "version": "0.0.1",
+  "description": "Follow winter learn fe",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,12 +15,24 @@
   "bugs": {
     "url": "https://github.com/tcitry/winter-fe/issues"
   },
-  "homepage": "https://github.com/tcitry/winter-fe#readme",
+  "homepage": "https://github.com/tcitry/winter-fe",
   "dependencies": {
     "images": "^3.2.4"
   },
   "devDependencies": {
     "css": "^3.0.0",
     "prettier": "2.4.0"
+  },
+  "type": "module",
+  "prettier": {
+    "tabWidth": 2,
+    "overrides": [
+      {
+        "files": "**/*.{js,ts,tsx,jsx}",
+        "options": {
+          "tabWidth": 4
+        }
+      }
+    ]
   }
 }

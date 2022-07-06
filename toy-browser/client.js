@@ -1,7 +1,7 @@
-const net = require("net");
-const parser = require("./parser");
-const render = require("./render");
-const images = require("images");
+import net from "net";
+import { parseHTML } from "./parser.js";
+import { render } from "./render.js";
+import images from "images";
 
 class Request {
     constructor(options) {
@@ -29,8 +29,8 @@ class Request {
     toString() {
         return `${this.method} ${this.path} HTTP/1.1\r
 ${Object.keys(this.headers)
-                .map((key) => `${key}: ${this.headers[key]}`)
-                .join(`\r\n`)}\r
+    .map((key) => `${key}: ${this.headers[key]}`)
+    .join(`\r\n`)}\r
 \r
 ${this.bodyText}`;
     }
@@ -72,7 +72,7 @@ ${this.bodyText}`;
     }
 }
 
-class Response { }
+class Response {}
 
 class ResponseParser {
     constructor() {
@@ -209,7 +209,7 @@ class TrunkedBodyParser {
     }
 }
 
-void async function () {
+void (async function () {
     let request = new Request({
         method: "POST",
         host: "127.0.0.1",
@@ -225,9 +225,9 @@ void async function () {
     });
     let response = await request.send();
     console.log("response:", response);
-    let dom = parser.parseHTML(response.body);
+    let dom = parseHTML(response.body);
     console.log("dom:", dom);
     let viewport = images(800, 600);
     render(viewport, dom);
     viewport.save("viewport.jpg");
-}();
+})();

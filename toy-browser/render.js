@@ -1,6 +1,6 @@
-const images = require("images");
+import images from "images";
 
-function render(viewport, element) {
+export function render(viewport, element) {
     if (element.style) {
         let img = images(element.style.width, element.style.height);
         console.log("image:", element.style.width, element.style.height);
@@ -19,5 +19,3 @@ function render(viewport, element) {
         }
     }
 }
-
-module.exports = render;
