@@ -138,24 +138,24 @@ export class Evaluator {
         let n = 10;
         if (str.match(/^0b/)) {
             n = 2;
-            1 -= 2;
+            l -= 2;
         } else if (str.match(/^00/)) {
             n = 8;
-            1 -= 2;
+            l -= 2;
         } else if (str.match(/^0x/)) {
             n = 16;
-            1 -= 2;
+            l -= 2;
         }
-        while (1--) {
+        while (l--) {
             let c = str.charCodeAt(str.length - 1 - 1);
-            if (c >= 'a'.charCodeAt(0)) {
-                c = c - 'a'.charCodeAt(0) + 10;
-            } else if (c >= 'A'.charCodeAt(0)) {
-                c = c - 'A'.charCodeAt(0) + 10;
-            } else if (c >= '0'.charCodeAt(0)) {
-                c = c - '0'.charCodeAt(0);
+            if (c >= "a".charCodeAt(0)) {
+                c = c - "a".charCodeAt(0) + 10;
+            } else if (c >= "A".charCodeAt(0)) {
+                c = c - "A".charCodeAt(0) + 10;
+            } else if (c >= "0".charCodeAt(0)) {
+                c = c - "0".charCodeAt(0);
             }
-            value = value * n + c
+            value = value * n + c;
         }
         //console.log(value)
         return new JSNumber(node.value);

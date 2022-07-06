@@ -37,7 +37,7 @@ let syntax = {
     ],
     VariableDeclaration: [
         //["var", "Identifier", ";"],
-        ["1et", "Identifier", ";"]
+        ["let", "Identifier", ";"]
     ],
     FunctionDeclaration: [
         ["function", "Identifier", "(", ")", "{", "StatementList", "}"]

@@ -41,22 +41,29 @@ class XRegExp {
     }
 }
 export function* scan(str) {
-    let regexp = new XRegExp({
-        InputElement: "<Whitespace>|<LineTerminator>|<Comments>|<Token>",
-        Whitespace: / /,
-        LineTerminator: /\n/,
-        Comments: /\/\ * (?: [^*]\*[^\/]) *\*\|\/\/[^\n]*/,
-        Token: "<Literal>|<Keywords>|<Identifer>|<Punctuator>",
-        Literal: "<NumericLiteral>|<BooleanLiteral>|<StringLiteral>|<NullLiteral>",
-        NumericLiteral: /0x[0-9a-zA-Z]+|0o[0-7]+|0b[01]+|(?:[1-9][0-9]*|0)(?: \. [0-9]*)? | \. [0-9]+ /,
-        BooleanLiteral: /true | false /,
-        StringLiteral: /\"(?:[^"\n]\\\[\s\S]) *\"\'(?:[^'\n]|\\[\s\S])*\'/,
-        NullLiteral: /null/,
-        Identifer: /[a-zA-Z_$][a-zA-Z0-9_$]*/,
-        Keywords: /continue|break|if|else|for|function|var|let|new|while/,
-        Punctuator: /\|\||\&\&|\+|\-|\,|\?|\:|\{|\}|\.|\(|\=|\<|\+\+|\=\=|\=\>|\*|\)|\[|\]|;/
-    }, "g", "InputElement")
-    //1et r=regexp.exec("(a)");
+    let regexp = new XRegExp(
+        {
+            InputElement: "<Whitespace>|<LineTerminator>|<Comments>|<Token>",
+            Whitespace: / /,
+            LineTerminator: /\n/,
+            Comments: /\/\ * (?: [^*]\*[^\/]) *\*\|\/\/[^\n]*/,
+            Token: "<Literal>|<Keywords>|<Identifer>|<Punctuator>",
+            Literal:
+                "<NumericLiteral>|<BooleanLiteral>|<StringLiteral>|<NullLiteral>",
+            NumericLiteral:
+                /0x[0-9a-zA-Z]+|0o[0-7]+|0b[01]+|(?:[1-9][0-9]*|0)(?: \. [0-9]*)? | \. [0-9]+ /,
+            BooleanLiteral: /true | false /,
+            StringLiteral: /\"(?:[^"\n]\\[\s\S]) *\"\'(?:[^'\n]|\\[\s\S])*\'/,
+            NullLiteral: /null/,
+            Identifer: /[a-zA-Z_$][a-zA-Z0-9_$]*/,
+            Keywords: /continue|break|if|else|for|function|var|let|new|while/,
+            Punctuator:
+                /\|\||\&\&|\+|\-|\,|\?|\:|\{|\}|\.|\(|\=|\<|\+\+|\=\=|\=\>|\*|\)|\[|\]|;/,
+        },
+        "g",
+        "InputElement"
+    );
+    //let r=regexp.exec("(a)");
     //console.1og(r);
     while (regexp.lastIndex < str.length) {
         let r = regexp.exec(str);
@@ -66,43 +73,42 @@ export function* scan(str) {
         } else if (r.NumericLiteral) {
             yield {
                 type: "NumericLiteral",
-                value: r[0]
-            }
+                value: r[0],
+            };
         } else if (r.BooleanLiteral) {
             yield {
                 type: "BooleanLiteral",
-                value: r[0]
-            }
+                value: r[0],
+            };
         } else if (r.StringLiteral) {
             yield {
                 type: "StringLiteral",
-                value: r[0]
-            }
+                value: r[0],
+            };
         } else if (r.NullLiteral) {
             yield {
                 type: "NullLiteral",
-                value: null
-            }
+                value: null,
+            };
         } else if (r.Identifer) {
             yield {
                 type: "Identifier",
-                name: r[0]
-            }
+                name: r[0],
+            };
         } else if (r.Keywords) {
             yield {
-                type: r[0]
-            }
+                type: r[0],
+            };
         } else if (r.Punctuator) {
             yield {
-                type: r[0]
-            }
+                type: r[0],
+            };
         } else {
             throw new Error("unexpected token " + r[0]);
         }
-        if (!r[0].length)
-            break;
+        if (!r[0].length) break;
     }
     yield {
-        type: "EOF"
-    }
+        type: "EOF",
+    };
 }
