@@ -44,4 +44,5 @@ function end(params) {
     return end
 }
 
+//字符串是否匹配`abcd`
 console.log(match("hi ababcd string"))

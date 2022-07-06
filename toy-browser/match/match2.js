@@ -54,4 +54,5 @@ function end(params) {
     return end
 }
 
+//字符串是否匹配`abcabx`
 console.log(match("hi abcabcabx string"))

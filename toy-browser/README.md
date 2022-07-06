@@ -1,89 +1,69 @@
-# toy-browser
+## toy-browser
 
-## Week01
+## 项目场景
 
-### 本周内容
+玩具浏览器，目的是通过客户端请求服务器，服务器返回 HTML 代码，核心是用 toy-browser 来对 HTML 进行解析和渲染。
 
-1. 状态机实践
-2. HTTP 请求与解析
+浏览器的工作原理：
+- 解析 HTML 文本（parse）
+- 计算属性（compute）
+- 布局（layout）
+- 绘制（render）
 
-文件目录：
+## 文件结构
 
-- match/match.js
-- match/match2.js
-- client.js
-- server.js
-- parser.js
+先看懂这两个状态机实现的 match 方法，用来测试匹配字符串，为词法扫描做准备。
+- match/match.js 字符串是否匹配`abcd`
+- match/match2.js 字符串是否匹配`abcabx`
 
-### 有限状态机
+client.js
+- class Request 发起请求
+- class ResponseParser 处理返回的 HTML 文本形成语法树
+- class ChunkedBodyParser Body 文本处理
+
+server.js
+- 返回一段 HTML 代码
+
+parser.js 扫描 server 返回的代码
+- 输入解析出来的 Body 文本
+- 按 HTML 的语法通过词法解析成 Dom 树 https://html.spec.whatwg.org/#tokenization
+
+layout.js 布局（以排版技术 flex 为例）
+- 得到 Dom 树后，根据 CSS 属性进行计算
+
+render.js 绘制
+
+viewport.jpg 通过检查图片的布局来校验整个程序正确性
+
+
+## 运行项目
+
+```shell
+# 启动服务端
+node server.js
+
+# 启动客户端
+node client.js
+```
+
+## 参考
+
+脑图 https://www.yuque.com/tcitry/blog/fe-stack
+
+tokenization https://html.spec.whatwg.org/#tokenization
+
+[浏览器的工作原理：新式网络浏览器幕后揭秘](https://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/)
+
+KMP https://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html
+
+《图解 HTTP》
 
 https://zh.wikipedia.org/wiki/%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA
 
 - Moore 机
 - Mealy 机
 
-### 字符串 KMP 算法
+https://www.npmjs.com/package/images
 
-https://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html
-
-
-### HTTP 协议内容
-
-参考：《图解 HTTP》
-
-1. HTTP 请求头和 HTTP 响应头的区别？
-
-### Node 标准库
-
-- net
-
-
-
-### Parser （编译原理）
-
-待卷
-
-### Promise, await, async
-
-待卷
-
-### 浏览器原理
-
-[浏览器的工作原理：新式网络浏览器幕后揭秘](https://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/)
-
-### 前端脑图
-
-https://www.yuque.com/tcitry/blog/fe-stack
-
-## Week02
-
-### 本周内容
-
-参考：https://html.spec.whatwg.org/#tokenization
-
-1. 解析 HTML
-2. 完善 CSS 计算
-
-文件目录：
-- parser.js
-
-### 编译原理
-
-1. 什么是 Token ？
-
-
-## Week03
-
-### 本周内容
-
-1. layout 布局
-2. render 渲染
-
-文件目录：
-- layout.js
-- render.js
-
-## 项目总结
-
-Winter 老师带着我们，从客户端发送请求到接收 HTTP 报文，到解析 HTTP 报文成 Response 对象，然后根据 HTTP Response Body 解析 HTML 和 CSS 内容，最后根据 HTML 和 CSS 进行布局和渲染。实现了一个简单的浏览器发送数据、接收数据到最后展示数据的过程。
+https://www.npmjs.com/package/css
 

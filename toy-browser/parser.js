@@ -11,10 +11,8 @@ let currentTextNode = null;
 let rules = [];
 
 function addCSSRules(text) {
-    let ast = css.parse(text);
-    console.log("ast:");
-    console.log(ast);
-    rules.push(...ast.stylesheet.rules);
+    let obj = css.parse(text);
+    rules.push(...obj.stylesheet.rules);
 }
 
 function match(element, selector) {
@@ -25,15 +23,15 @@ function match(element, selector) {
         let attr = element.attributes.filter((attr) => attr.name === "id")[0];
         if (attr && attr.value === selector.replace("#", "")) {
             return true;
-        } else if (selector.charAt(0) === ".") {
-            let attr = element.attributes.filter((attr) => attr.name === "class")[0];
-            if (attr && attr.value === selector.replace(".", "")) {
-                return true;
-            } else {
-                if (element.tagName === selector) {
-                    return true;
-                }
-            }
+        }
+    } else if (selector.charAt(0) === ".") {
+        let attr = element.attributes.filter((attr) => attr.name === "class")[0];
+        if (attr && attr.value === selector.replace(".", "")) {
+            return true;
+        }
+    } else {
+        if (element.tagName === selector) {
+            return true;
         }
     }
 }
@@ -104,7 +102,6 @@ function computeCSS(element) {
                     }
                 }
             }
-            console.log(element.computedStyle);
         }
     }
 }
@@ -129,7 +126,6 @@ function emit(token) {
                 });
             }
         }
-
         computeCSS(element);
 
         top.children.push(element);
@@ -363,7 +359,6 @@ function parseHTML(html) {
         state = state(c);
     }
     state = state(EOF);
-    console.log(rules);
     return stack[0];
 }
 

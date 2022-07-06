@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/tcitry/winter-fe#readme",
   "dependencies": {
-    "images": "^3.2.3"
+    "images": "^3.2.4"
   },
   "devDependencies": {
     "css": "^3.0.0",

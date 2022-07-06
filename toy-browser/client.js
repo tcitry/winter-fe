@@ -1,6 +1,6 @@
 const net = require("net");
 const parser = require("./parser");
-const render = require("./render.js");
+const render = require("./render");
 const images = require("images");
 
 class Request {
@@ -224,8 +224,10 @@ void async function () {
         },
     });
     let response = await request.send();
+    console.log("response:", response);
     let dom = parser.parseHTML(response.body);
+    console.log("dom:", dom);
     let viewport = images(800, 600);
     render(viewport, dom);
-    // console.log("dom: ", dom);
+    viewport.save("viewport.jpg");
 }();
